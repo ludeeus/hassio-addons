@@ -106,4 +106,4 @@ jobs:
             ${{ env.BUILD_ARGS }} \
             --${{ matrix.arch }} \
             --target /data/${{ matrix.addon }} \
-            --docker-hub homeassistant
+            --docker-hub ludeeus
