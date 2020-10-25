@@ -1,6 +1,7 @@
 ARG BUILD_FROM
 FROM ${BUILD_FROM}
 
+
 # Install Ada
 WORKDIR /usr/src/ada
 ARG ADA_VERSION
