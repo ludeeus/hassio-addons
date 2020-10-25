@@ -50,3 +50,5 @@ jobs:
 
       - name: Run linter
         uses: ludeeus/action-shellcheck@master
+        with:
+          additional_files: run finish discovery

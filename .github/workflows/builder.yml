@@ -51,11 +51,11 @@ jobs:
 
           changed=$(echo ${changed_addons[@]} | rev | cut -c 2- | rev)
           if [[ -n ${changed} ]]; then
-            echo "Changed add-ons: $changed"
-            echo "::set-output name=changed::true"
-            echo "::set-output name=addons::[$changed]"
+            echo "Changed add-ons: $changed";
+            echo "::set-output name=changed::true";
+            echo "::set-output name=addons::[$changed]";
           else
-            echo "No add-on had any monitored files changed (${{ env.MONITORED_FILES }})"
+            echo "No add-on had any monitored files changed (${{ env.MONITORED_FILES }})";
           fi
 
   build:
@@ -84,7 +84,7 @@ jobs:
            if [[ "${{ steps.info.outputs.architectures }}" =~ ${{ matrix.arch }} ]]; then
               echo "::set-output name=buld_arch::true";
             else
-              echo "${{ matrix.arch }} is not a valid arch for ${{ matrix.addon }}, skipping build"
+              echo "${{ matrix.arch }} is not a valid arch for ${{ matrix.addon }}, skipping build";
            fi
 
       - name: Set build arguments
