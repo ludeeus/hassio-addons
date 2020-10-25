@@ -29,14 +29,17 @@ jobs:
       - name: Get add-ons
         id: addons
         run: |
-          addons=$(find ./ -name config.json | cut -d "/" -f2 | sort -u)
-          echo "::set-output name=addons::$addons"
+          declare -a addons
+          for addon in $(find ./ -name config.json | cut -d "/" -f2 | sort -u); do
+            addons+=("$addon");
+          done
+          echo "::set-output name=addons::${addons[@]}"
 
       - name: Get changed add-ons
         id: changed_addons
         run: |
           declare -a changed_addons
-          for addon in "${{ steps.addons.outputs.addons }}"; do
+          for addon in ${{ steps.addons.outputs.addons }}; do
             if [[ "${{ steps.changed_files.outputs.all }}" =~ $addon ]]; then
               for file in ${{ env.MONITORED_FILES }}; do
                   if [[ "${{ steps.changed_files.outputs.all }}" =~ $addon/$file ]]; then
