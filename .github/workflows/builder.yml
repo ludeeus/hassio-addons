@@ -36,7 +36,7 @@ jobs:
         id: changed_addons
         run: |
           declare -a changed_addons
-          for addon in ${{ steps.addons.outputs.addons }}; do
+          for addon in "${{ steps.addons.outputs.addons }}"; do
             if [[ "${{ steps.changed_files.outputs.all }}" =~ $addon ]]; then
               for file in ${{ env.MONITORED_FILES }}; do
                   if [[ "${{ steps.changed_files.outputs.all }}" =~ $addon/$file ]]; then
@@ -47,10 +47,10 @@ jobs:
           done
 
           changed=$(echo ${changed_addons[@]} | rev | cut -c 2- | rev)
-          echo "::set-output name=addons::[$changed]"
-          if [[ ! -z ${changed} ]]; then
+          if [[ -n ${changed} ]]; then
             echo "Changed add-ons: $changed"
             echo "::set-output name=changed::true"
+            echo "::set-output name=addons::[$changed]"
           else
             echo "No add-on had any monitored files changed (${{ env.MONITORED_FILES }})"
           fi
