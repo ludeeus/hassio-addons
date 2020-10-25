@@ -1,6 +1,7 @@
 ARG BUILD_FROM
 FROM $BUILD_FROM
 
+
 # Setup base
 ARG DEHYDRATED_VERSION
 RUN apk add --no-cache openssl \
